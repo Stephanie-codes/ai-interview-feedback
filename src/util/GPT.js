@@ -1,4 +1,4 @@
-let userAccessToken = "INSERT TOKEN"
+let userAccessToken = process.env.REACT_APP_OPENAI_API_KEY
 const clientID = process.env.REACT_APP_OPENAI_ORG_KEY
 
 const GPT = {
