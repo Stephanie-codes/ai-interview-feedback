@@ -7,6 +7,14 @@ const App = () => {
   
   GPT.test()
 
+  const [gptOutput, setGptOutput] = useState(""); 
+
+  const handleGptOutput = (output) => {
+    setGptOutput(output);
+  };
+  
+  GPT.test(handleGptOutput); 
+
   const {
     transcript,
     listening,
@@ -25,6 +33,7 @@ const App = () => {
       <button onClick={SpeechRecognition.stopListening}>Stop</button>
       <button onClick={resetTranscript}>Reset</button>
       <p>{transcript}</p>
+      <p>Feedback: {gptOutput}</p>
     </div>
   );
 };
