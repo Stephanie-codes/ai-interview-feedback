@@ -1,5 +1,6 @@
 let userAccessToken = process.env.REACT_APP_OPENAI_API_KEY
-const clientID = process.env.REACT_APP_OPENAI_ORG_KEY
+// const clientID = process.env.REACT_APP_OPENAI_ORG_KEY
+const model = "text-davinci-002"
 
 const GPT = {
     getAccessToken() {
@@ -8,20 +9,48 @@ const GPT = {
         }
     },
 
-    test() {
+    // test() {
+    //     const accessToken = GPT.getAccessToken();
+    //     return fetch(`https://api.openai.com/v1/models`, {
+    //         headers: {
+    //             Authorization: `Bearer ${accessToken}`
+    //         }
+    //     }).then(response => {
+    //         return response.json();
+    //     }).then(jsonResponse => {
+    //         if (jsonResponse.error) {
+    //             console.log(jsonResponse.error?.message)
+    //             return
+    //         }
+    //         console.log(jsonResponse)
+    //     }).catch(error => {
+    //         console.log(error)
+    //     })
+    // },
+
+    chatCompletion() {
         const accessToken = GPT.getAccessToken();
-        return fetch(`https://api.openai.com/v1/models`, {
+        return fetch(`https://api.openai.com/v1/engines/${model}/completions`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
-            }
+            },
+            messages: [{
+                "role": "user", 
+                "content": "What is 5 + 10?"
+            }]
         }).then(response => {
             return response.json();
         }).then(jsonResponse => {
+            if (jsonResponse.error) {
+                console.log(jsonResponse.error?.message)
+                return
+            }
             console.log(jsonResponse)
-        }).catch(error => {
-            console.log(error)
+        }).catch(err => {
+            console.log(err)
         })
     }
+
 }
 
 export default GPT;
