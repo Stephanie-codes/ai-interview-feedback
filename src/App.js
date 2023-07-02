@@ -5,7 +5,7 @@ import GPT from "./util/GPT"
 
 const App = () => {
   
-  GPT.test()
+  GPT.chatCompletion()
 
   const {
     transcript,
